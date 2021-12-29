@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
-        <import type="android.app.Activity"/>
+
+        <import type="android.app.Activity" />
 
         <variable
             name="viewModel"
@@ -59,16 +60,61 @@
             app:layout_constraintTop_toBottomOf="@id/inputLayout" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:textSize="16sp"
-            android:text="@{viewModel.result}"
+            android:text="@{viewModel.summonerId}"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView" />
+
+        <TextView
+            android:id="@+id/summonerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{viewModel.result.rankInfo.get(0).summonerName}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintTop_toTopOf="@id/imageView"
+            tools:text="룰오브례쪈드1234" />
+
+        <TextView
+            android:id="@+id/rankTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{viewModel.result.rankInfo.get(0).tier}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/summonerName"
+            app:layout_constraintTop_toBottomOf="@id/summonerName"
+            tools:text="골드2" />
+
+        <TextView
+            android:id="@+id/leaguePointsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/rankTextView"
+            app:layout_constraintTop_toBottomOf="@id/rankTextView"
+            tools:text="29" />
+
+<!--        android:text="@{viewModel.result.rankInfo.get(0).leaguePoints}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

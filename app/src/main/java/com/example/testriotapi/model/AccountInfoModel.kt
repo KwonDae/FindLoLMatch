@@ -16,7 +16,7 @@ data class AccountInfoModel(
     var accountId: String?,
     var puuid: String?,
     var name: String?,
-    var rankInfo: MutableList<AccountRankModel>?
+    var rankInfo: ArrayList<AccountRankModel>?
 
 ) : Parcelable
 

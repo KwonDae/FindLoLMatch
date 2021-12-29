@@ -8,6 +8,7 @@ import com.example.testriotapi.BuildConfig
 import com.example.testriotapi.Common.Constants
 import com.example.testriotapi.network.ApiSummonerService
 import com.example.testriotapi.util.PreferenceManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

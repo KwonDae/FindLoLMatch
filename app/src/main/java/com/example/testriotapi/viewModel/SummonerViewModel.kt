@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testriotapi.Common.RESPONSE_STATUS
+import com.example.testriotapi.model.AccountInfoModel
 import com.example.testriotapi.repository.SummonerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,9 +22,11 @@ import javax.inject.Inject
 class SummonerViewModel @Inject constructor(private val repository: SummonerRepository) :
     ViewModel() {
 
-    private var _result = MutableLiveData<String>("결과테스트")
-    val result: LiveData<String>
+    private var _result = MutableLiveData<AccountInfoModel>()
+    val result: LiveData<AccountInfoModel>
         get() = _result
+
+    var summonerId = MutableLiveData<String>("")
 
     fun getSummonerData(userId: String) {
         viewModelScope.launch {
@@ -31,11 +34,12 @@ class SummonerViewModel @Inject constructor(private val repository: SummonerRepo
                 when (responseStatus) {
                     RESPONSE_STATUS.OKAY -> {
 //                        _result.postValue(id)
+                        summonerId.postValue(id)
                         getRankInfo(id)
                     }
 
                     RESPONSE_STATUS.FAIL -> {
-                        _result.postValue(id)
+//                        _result.postValue(id)
                     }
 
                     RESPONSE_STATUS.NO_CONTENT -> {
@@ -48,9 +52,20 @@ class SummonerViewModel @Inject constructor(private val repository: SummonerRepo
 
     private fun getRankInfo(summonerId: String) {
         viewModelScope.launch {
-            repository.getRankInfo(encryptedSummonerId = summonerId, completion = { responseStatus, result ->
-                _result.postValue(result)
-            })
+            repository.getRankInfo(
+                encryptedSummonerId = summonerId,
+                completion = { responseStatus, accountInfoModel ->
+                    when (responseStatus) {
+                        RESPONSE_STATUS.OKAY -> {
+                            result.let {
+                                _result.postValue(accountInfoModel)
+                            }
+
+                        }
+                    }
+
+//                _result.postValue(result)
+                })
         }
     }
 }

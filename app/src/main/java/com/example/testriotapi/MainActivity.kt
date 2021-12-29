@@ -29,7 +29,21 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getSummonerData(binding.editText.text.toString())
             }
         }
+
+        viewModel.result.observe(this) {
+            it?.let {
+                when(it.rankInfo?.get(0)?.tier) {
+                    "GOLD" -> {
+                        binding.imageView.setImageResource(R.drawable.emblem_gold)
+                    }
+                    else -> {
+                        binding.imageView.setImageResource(R.drawable.emblem_challenger)
+                    }
+                }
+            }
+        }
     }
+
 
     private fun initBinding() {
         binding.apply {

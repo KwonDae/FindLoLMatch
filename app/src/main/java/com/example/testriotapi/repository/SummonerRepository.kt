@@ -1,10 +1,11 @@
 package com.example.testriotapi.repository
 
-import android.util.Log
-import com.example.testriotapi.Common.Constants.TAG
 import com.example.testriotapi.Common.RESPONSE_STATUS
+import com.example.testriotapi.model.AccountInfoModel
+import com.example.testriotapi.model.AccountRankModel
 import com.example.testriotapi.network.ApiSummonerService
 import com.example.testriotapi.util.PreferenceManager
+import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -18,20 +19,46 @@ import javax.inject.Inject
  * @created 2021/12/29
  */
 
-class SummonerRepository @Inject constructor(private val apiService: ApiSummonerService, private val pref: PreferenceManager) {
+class SummonerRepository @Inject constructor(
+    private val apiService: ApiSummonerService,
+    private val pref: PreferenceManager
+) {
 
     suspend fun getRankInfo(
         encryptedSummonerId: String,
-        completion: (RESPONSE_STATUS, String) -> Unit
+        completion: (RESPONSE_STATUS, AccountInfoModel) -> Unit
     ) {
         val result = apiService.getRankInfo(encryptedSummonerId = encryptedSummonerId).let {
             it
         }
 
+        if (result.code() == 200) {
+
+            var accountInfoModel: AccountInfoModel =
+                AccountInfoModel(null, null, null, null, null)
+            result.body()?.let {
+                accountInfoModel.apply {
+                    val array = it.asJsonArray
+                    var inputArray = ArrayList<AccountRankModel>()
+                    for (i in 0 until array.size()) {
+                        inputArray.add(
+                            Gson().fromJson(
+                                array[i].asJsonObject,
+                                AccountRankModel::class.java
+                            )
+                        )
+                    }
+                    rankInfo?.addAll(inputArray)
+                }
+            } ?: return
+            completion(RESPONSE_STATUS.OKAY, accountInfoModel)
+        } else {
+            return
+        }
+
 //        val array = result.body()?.asJsonArray
 //        val obj = array?.get(0)?.asJsonObject?.toString()
-
-        completion(RESPONSE_STATUS.OKAY, result.body()?.toString()!!)
+//        completion(RESPONSE_STATUS.OKAY, result.body()?.toString()!!)
 
 //        if(result.code() == 200) {
 //            result.body()?.let {
@@ -43,13 +70,13 @@ class SummonerRepository @Inject constructor(private val apiService: ApiSummoner
 
     suspend fun getSummoner(
         userId: String,
-        completion : (RESPONSE_STATUS, String) -> Unit
+        completion: (RESPONSE_STATUS, String) -> Unit
     ) {
         val result = apiService.getSummoner(userId).let {
             it
         } ?: return
 
-        if(result.code() == 200) {
+        if (result.code() == 200) {
             result.body()?.let {
                 val body = it.asJsonObject
                 val id = body.get("id").asString
