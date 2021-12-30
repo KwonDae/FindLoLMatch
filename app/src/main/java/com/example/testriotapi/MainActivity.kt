@@ -32,14 +32,20 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.result.observe(this) {
             it?.let {
-                when(it.rankInfo?.get(0)?.tier) {
-                    "GOLD" -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_gold)
-                    }
-                    else -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_challenger)
-                    }
+                when {
+
                 }
+//                when(it.rankInfo?.get(0)?.tier) {
+//                    "GOLD" -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_gold)
+//                    }
+//                    "SILVER" -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_silver)
+//                    }
+//                    else -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_challenger)
+//                    }
+//                }
             }
         }
     }

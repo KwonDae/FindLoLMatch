@@ -11,12 +11,14 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class AccountInfoModel(
+data class SummonerModel(
     var id: String?,
     var accountId: String?,
     var puuid: String?,
     var name: String?,
-    var rankInfo: ArrayList<AccountRankModel>?
+    var profileIconId: Int?,
+    var revisionDate: Long?,
+    var summonerLevel: Long?
 
 ) : Parcelable
 

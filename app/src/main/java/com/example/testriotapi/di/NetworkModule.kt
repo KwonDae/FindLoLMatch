@@ -11,6 +11,7 @@ import com.example.testriotapi.util.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.mhows.reple.network.adapter.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -33,6 +35,10 @@ import javax.inject.Singleton
 object NetworkModule {
     
     private val BASE_URL = Constants.BASE_URL
+
+    private const val CONNECT_TIMEOUT = 15L
+    private const val WRITE_TIMEOUT = 15L
+    private const val READ_TIMEOUT = 15L
     
     @Provides
     fun provideGson(): Gson = GsonBuilder().create()
@@ -40,9 +46,13 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(pref: PreferenceManager): OkHttpClient = OkHttpClient.Builder().apply {
+        connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+        writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+        readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
         addInterceptor { chain ->
             val original = chain.request()
             val builder = original.newBuilder()
+
             builder.addHeader("X-Riot-Token", Constants.API_KEY)
             builder.method(original.method, original.body)
             val request = builder.build()
@@ -70,6 +80,7 @@ object NetworkModule {
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit = Retrofit.Builder().apply {
         baseUrl(BASE_URL)
         addConverterFactory(GsonConverterFactory.create(gson))
+        addCallAdapterFactory(CoroutineCallAdapterFactory())
         client(okHttpClient)
     }.build()
 
