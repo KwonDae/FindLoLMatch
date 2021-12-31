@@ -18,6 +18,7 @@ object DataBindingAdapter {
     fun bindImage(imageView: ImageView, imageUrl: String?) {
         imageUrl?.let {
             Glide.with(imageView).load(imageUrl).centerCrop().into(imageView)
+
         }
     }
 }

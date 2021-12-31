@@ -25,33 +25,35 @@ class SummonerRepository @Inject constructor(
     private val pref: PreferenceManager
 ) {
 
-    suspend fun getRankInfo(
-        encryptedSummonerId: String,
-        onSuccess: (AccountRankModel) -> Unit,
-        onError: (ApiResult.Error<*>?) -> Unit
-    ) {
-        val result = apiService.getRankInfo(encryptedSummonerId = encryptedSummonerId)
-
-
-    }
-
     suspend fun getSummoner(
         userId: String,
         onSuccess: (SummonerModel) -> Unit,
         onError: (ApiResult.Error<*>?) -> Unit
     ) {
         val result = apiService.getSummoner(userId)
-        Log.d(TAG, "SummonerRepository - getSummoner called / 1")
         result.onSuccess {
-            Log.d(TAG, "SummonerRepository - getSummoner called / 2")
             data?.let {
-                Log.d(TAG, "SummonerRepository - getSummoner called / 3")
+                onSuccess(it)
+            }
+        }.onError {
+
+            onError(this)
+        }
+    }
+
+    suspend fun getRankInfo(
+        encryptedSummonerId: String,
+        onSuccess: (MutableList<AccountRankModel>) -> Unit,
+        onError: (ApiResult.Error<*>?) -> Unit
+    ) {
+        val result = apiService.getRankInfo(encryptedSummonerId = encryptedSummonerId)
+        result.onSuccess {
+            data?.let {
                 onSuccess(it)
             }
         }.onError {
             onError(this)
         }
-
 
     }
 }

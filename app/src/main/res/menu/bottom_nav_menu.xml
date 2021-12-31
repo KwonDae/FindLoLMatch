@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/searchSummonerFragment"
+        android:title="SearchSummoner"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+    <item android:id="@+id/searchListFragment"
+        android:title="SearchList"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+    <item android:id="@+id/settingsFragment"
+        android:title="Settings"
+        android:icon="@drawable/ic_launcher_foreground"/>
+
+</menu>

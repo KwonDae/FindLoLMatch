@@ -1,12 +1,7 @@
 package com.example.testriotapi.network
 
 import com.example.testriotapi.model.AccountRankModel
-import com.example.testriotapi.model.ReturnModel
 import com.example.testriotapi.model.SummonerModel
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -27,5 +22,5 @@ interface ApiSummonerService {
     @GET("/lol/league/v4/entries/by-summoner/{encryptedSummonerId}")
     suspend fun getRankInfo(
         @Path("encryptedSummonerId") encryptedSummonerId: String
-    ) : ApiResult<ReturnModel<AccountRankModel>>
+    ) : ApiResult<MutableList<AccountRankModel>>
 }
