@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavHostController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.testriotapi.R
 import com.example.testriotapi.ui.viewModels.SummonerViewModel
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         initBinding()
         setSupportActionBar(binding.toolbar)
-        binding.bottomNavigationView.setupWithNavController(binding.navHostFragment.findNavController())
+
     }
 
 
@@ -33,10 +35,10 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
 
         }
-//        binding.bottomNavigationView.setupWithNavController()
-//        binding.bottomNavigationView.setupWithNavController(binding.nav.findNavController())
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
-
+        binding.bottomNavigationView.setupWithNavController(navController)
 
     }
 }
