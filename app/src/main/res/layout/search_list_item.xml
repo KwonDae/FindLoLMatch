@@ -68,6 +68,29 @@
             app:layout_constraintStart_toStartOf="@id/rankTextView"
             app:layout_constraintTop_toBottomOf="@id/rankTextView"
             tools:text="29" />
+
+        <TextView
+            android:id="@+id/winsAndLossesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:text="@{@string/win_and_loss(item.wins, item.losses)}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/leaguePointsTextView"
+            app:layout_constraintTop_toBottomOf="@id/leaguePointsTextView"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/winsAndLossesTextView"
+            app:layout_constraintStart_toStartOf="@id/winsAndLossesTextView"
+            android:layout_marginTop="12dp"
+            style="@style/Widget.MaterialComponents.TimePicker.Button"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_table")
 data class User(
-    val summonerId: String? = null,
+    val summonerId: String,
     val summonerName: String? = null,
     val profileIconId: Int? = 0,
     val summonerLevel: Long? = 0L,
@@ -23,6 +23,6 @@ data class User(
     val losses: Int?,
     var timestamp: Long = 0L
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null
+    @PrimaryKey(autoGenerate = false)
+    var id: String = summonerId
 }

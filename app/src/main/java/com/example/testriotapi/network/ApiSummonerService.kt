@@ -23,4 +23,9 @@ interface ApiSummonerService {
     suspend fun getRankInfo(
         @Path("encryptedSummonerId") encryptedSummonerId: String
     ) : ApiResult<MutableList<AccountRankModel>>
+
+    @GET("/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}")
+    suspend fun getActiveGames(
+        @Path("encryptedSummonerId") encryptedSummonerId: String
+    ) : ApiResult<MutableList<*>>
 }

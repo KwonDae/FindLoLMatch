@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testriotapi.R
-import com.example.testriotapi.databinding.FragmentSearchListBinding
-import com.example.testriotapi.databinding.SearchItemBinding
+import com.example.testriotapi.databinding.SearchListItemBinding
 import com.example.testriotapi.db.User
 import com.example.testriotapi.ui.viewModels.SummonerViewModel
 
@@ -21,19 +20,23 @@ class SearchListAdapter(private val viewModel: SummonerViewModel, private val da
     RecyclerView.Adapter<SearchListAdapter.ViewHolder>()
     {
 
-    class ViewHolder(private val binding: SearchItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: SearchListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(viewModel: SummonerViewModel, item: User, position: Int) {
             binding.apply {
                 this.viewModel = viewModel
                 this.item = item
                 executePendingBindings()
             }
+
+            binding.deleteButton.setOnClickListener {
+                viewModel.deleteUser(item)
+            }
         }
     }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            val binding = DataBindingUtil.inflate<SearchItemBinding>(inflater, R.layout.search_item, parent, false)
+            val binding = DataBindingUtil.inflate<SearchListItemBinding>(inflater, R.layout.search_list_item, parent, false)
             return ViewHolder(binding)
         }
 

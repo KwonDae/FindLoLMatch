@@ -72,7 +72,7 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
                         viewModelScope.launch {
                             summonerRepository.insertUser(
                                 User(
-                                    summonerId = it[0].summonerId,
+                                    summonerId = it[0].summonerId!!,
                                     summonerName = it[0].summonerName,
                                     profileIconId = result.value?.profileIconId,
                                     summonerLevel = result.value?.summonerLevel,
@@ -97,7 +97,9 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
 
     private fun getDataList() {
         viewModelScope.launch {
-            dataList.addAll(summonerRepository.getUser())
+            summonerRepository.getUser().let {
+                dataList.addAll(it)
+            }
             adapter.notifyDataSetChanged()
         }
     }
@@ -105,6 +107,13 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
     fun setDataList() {
         dataList.clear()
         getDataList()
+    }
+
+    fun deleteUser(user: User) {
+        viewModelScope.launch {
+            summonerRepository.deleteUser(user)
+            setDataList()
+        }
     }
 
 

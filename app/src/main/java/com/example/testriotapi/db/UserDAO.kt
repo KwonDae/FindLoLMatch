@@ -20,5 +20,5 @@ interface UserDAO {
     suspend fun deleteUser(user: User)
 
     @Query("SELECT * FROM user_table ORDER BY timestamp DESC")
-    suspend fun getAllUserSortedByDate(): MutableList<User>
+    suspend fun getAllUserSortedByDate(): List<User>
 }
