@@ -1,6 +1,9 @@
 package com.example.testriotapi.di
 
 import android.content.Context
+import androidx.room.Room
+import com.example.testriotapi.Common.Constants.USER_DATABASE_NAME
+import com.example.testriotapi.db.UserDatabase
 import com.example.testriotapi.util.PreferenceManager
 import dagger.Module
 import dagger.Provides
@@ -25,4 +28,18 @@ class AppModule {
     fun provideSharedPreference(@ApplicationContext context: Context): PreferenceManager {
         return PreferenceManager(context)
     }
+
+    @Singleton
+    @Provides
+    fun provideUserDatabase(
+        @ApplicationContext app: Context
+    ): UserDatabase = Room.databaseBuilder(
+        app,
+        UserDatabase::class.java,
+        USER_DATABASE_NAME
+    ).build()
+
+    @Singleton
+    @Provides
+    fun provideUserDao(db: UserDatabase) = db.getUserDao()
 }
