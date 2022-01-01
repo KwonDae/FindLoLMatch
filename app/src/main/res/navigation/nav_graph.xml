@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/searchSummonerFragment"
-        android:name="com.example.testriotapi.ui.fragments.SearchSummonerFragment"
+        android:name="com.example.testriotapi.ui.searchSummoner.SearchSummonerFragment"
         android:label="SearchSummonerFragment" />
     <fragment
         android:id="@+id/searchListFragment"
-        android:name="com.example.testriotapi.ui.fragments.SearchListFragment"
+        android:name="com.example.testriotapi.ui.searchList.SearchListFragment"
         android:label="fragment_search_list"
         tools:layout="@layout/fragment_search_list" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.testriotapi.ui.fragments.SettingsFragment"
+        android:name="com.example.testriotapi.ui.setting.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

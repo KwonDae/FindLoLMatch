@@ -3,6 +3,7 @@ package com.example.testriotapi.repository
 import android.util.Log
 import com.example.testriotapi.Common.Constants.TAG
 import com.example.testriotapi.Common.RESPONSE_STATUS
+import com.example.testriotapi.db.User
 import com.example.testriotapi.db.UserDAO
 import com.example.testriotapi.model.SummonerModel
 import com.example.testriotapi.model.AccountRankModel
@@ -58,4 +59,8 @@ class SummonerRepository @Inject constructor(
         }
 
     }
+
+    suspend fun insertUser(user: User) = userDao.insertUser(user)
+
+    suspend fun getUser() = userDao.getAllUserSortedByDate()
 }

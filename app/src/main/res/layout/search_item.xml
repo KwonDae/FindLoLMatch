@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.app.Activity" />
+
+        <variable
+            name="item"
+            type="com.example.testriotapi.db.User" />
+        <variable
+            name="viewModel"
+            type="com.example.testriotapi.ui.viewModels.SummonerViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:tierImage="@{item.tier}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/summonerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{item.summonerName}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintTop_toTopOf="@id/imageView"
+            tools:text="룰오브례쪈드1234" />
+
+        <TextView
+            android:id="@+id/rankTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{item.tier + item.rank}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="@{item.tier == null ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@id/summonerName"
+            app:layout_constraintTop_toBottomOf="@id/summonerName"
+            tools:text="골드2" />
+
+        <TextView
+            android:id="@+id/leaguePointsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:text="@{item.leaguePoints.toString()}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/rankTextView"
+            app:layout_constraintTop_toBottomOf="@id/rankTextView"
+            tools:text="29" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

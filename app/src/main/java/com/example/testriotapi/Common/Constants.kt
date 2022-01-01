@@ -13,7 +13,7 @@ object Constants {
     const val USER_DATABASE_NAME = "user_db"
 
     val BASE_URL = "https://kr.api.riotgames.com/lol/"
-    val API_KEY = "RGAPI-40dbd2fa-945b-4e74-a00b-2be17e2f7158"
+    val API_KEY = "RGAPI-01cb4fab-c58c-4e1e-b38f-9bd09db427ff"
 }
 
 enum class RESPONSE_STATUS{

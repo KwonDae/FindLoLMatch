@@ -1,4 +1,4 @@
-package com.example.testriotapi.ui.fragments
+package com.example.testriotapi.ui.searchSummoner
 
 import android.os.Bundle
 import android.util.Log
