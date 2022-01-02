@@ -83,16 +83,17 @@ class SearchSummonerFragment : Fragment() {
 
     private fun initBinding() {
         binding.apply {
-            lifecycleOwner = this@SearchSummonerFragment
+            lifecycleOwner = viewLifecycleOwner
             viewModel = this@SearchSummonerFragment.viewModel
         }
 
-        binding.button.setOnClickListener {
+        binding.searchButton.setOnClickListener {
             if (binding.editText.toString().isNotEmpty()) {
 //                val id = URLEncoder.encode(binding.editText.text.toString())
                 viewModel.getSummonerData(binding.editText.text.toString())
             }
         }
+
         viewModel.accountRankModel.observe(viewLifecycleOwner) {
             it?.let {
                 when (it[0].tier) {

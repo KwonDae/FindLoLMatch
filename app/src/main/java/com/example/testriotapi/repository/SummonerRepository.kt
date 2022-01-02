@@ -60,6 +60,22 @@ class SummonerRepository @Inject constructor(
 
     }
 
+    suspend fun getActiveGames(
+        encryptedSummonerId: String,
+    ): Boolean {
+        var value = false
+        val result = apiService.getActiveGames(encryptedSummonerId = encryptedSummonerId)
+        result.onSuccess {
+            data?.let {
+                value = true
+            }
+        }.onError {
+            value = false
+        }
+
+        return value
+    }
+
     suspend fun insertUser(user: User) = userDao.insertUser(user)
 
     suspend fun deleteUser(user: User) = userDao.deleteUser(user)

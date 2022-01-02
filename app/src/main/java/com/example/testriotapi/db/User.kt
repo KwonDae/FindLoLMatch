@@ -19,9 +19,11 @@ data class User(
     val rank: String? = null,
     val tier: String? = null,
     val leaguePoints: Int?,
-    val wins: Int?,
-    val losses: Int?,
-    var timestamp: Long = 0L
+    val wins: Int? = 0,
+    val losses: Int? = 0,
+    var timestamp: Long = 0L,
+    val searchDate: String?,
+    val isGaming: Boolean?
 ) {
     @PrimaryKey(autoGenerate = false)
     var id: String = summonerId

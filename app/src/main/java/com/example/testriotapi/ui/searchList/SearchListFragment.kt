@@ -59,7 +59,7 @@ class SearchListFragment : Fragment() {
 
     private fun initBinding() {
         binding.apply {
-            lifecycleOwner = this@SearchListFragment
+            lifecycleOwner = viewLifecycleOwner
             viewModel = this@SearchListFragment.viewModel
         }
 

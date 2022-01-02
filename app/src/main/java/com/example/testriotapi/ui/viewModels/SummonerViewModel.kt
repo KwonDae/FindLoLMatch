@@ -9,10 +9,9 @@ import com.example.testriotapi.model.AccountRankModel
 import com.example.testriotapi.model.SummonerModel
 import com.example.testriotapi.repository.SummonerRepository
 import com.example.testriotapi.ui.searchList.SearchListAdapter
+import com.example.testriotapi.util.CommonUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -28,9 +27,9 @@ import javax.inject.Inject
 class SummonerViewModel @Inject constructor(private val summonerRepository: SummonerRepository) :
     ViewModel() {
 
-    private var _result = MutableLiveData<SummonerModel>()
-    val result: LiveData<SummonerModel>
-        get() = _result
+    private var _accountInfo = MutableLiveData<SummonerModel>()
+    val accountInfo: LiveData<SummonerModel>
+        get() = _accountInfo
 
     private var _accountRankModel = MutableLiveData<MutableList<AccountRankModel>>()
     val accountRankModel: LiveData<MutableList<AccountRankModel>>
@@ -47,7 +46,7 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
                 userId = userId,
                 onSuccess = {
                     it.let {
-                        _result.postValue(it)
+                        _accountInfo.postValue(it)
                         getRankInfo(it.id.toString())
                     }
                 },
@@ -59,9 +58,6 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
     }
 
     private fun getRankInfo(summonerId: String) {
-//        val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.KOREA)
-//        val time = dateFormat.format(Date())
-
         viewModelScope.launch {
             summonerRepository.getRankInfo(
                 encryptedSummonerId = summonerId,
@@ -69,23 +65,30 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
                     it.let {
                         _accountRankModel.postValue(it)
 
-                        viewModelScope.launch {
-                            summonerRepository.insertUser(
-                                User(
-                                    summonerId = it[0].summonerId!!,
-                                    summonerName = it[0].summonerName,
-                                    profileIconId = result.value?.profileIconId,
-                                    summonerLevel = result.value?.summonerLevel,
-                                    rank = it[0].rank,
-                                    tier = it[0].tier,
-                                    leaguePoints = it[0].leaguePoints,
-                                    timestamp = System.currentTimeMillis(),
-                                    wins = it[0].wins,
-                                    losses = it[0].losses
-                                )
-                            )
-                        }
 
+                        viewModelScope.launch {
+                            val isGaming = summonerRepository.getActiveGames(summonerId)
+                            for (model in it) {
+                                if (model.queueType == "RANKED_SOLO_5x5") {
+                                    summonerRepository.insertUser(
+                                        User(
+                                            summonerId = model.summonerId!!,
+                                            summonerName = model.summonerName,
+                                            profileIconId = accountInfo.value?.profileIconId,
+                                            summonerLevel = accountInfo.value?.summonerLevel,
+                                            rank = model.rank,
+                                            tier = model.tier,
+                                            leaguePoints = model.leaguePoints,
+                                            timestamp = System.currentTimeMillis(),
+                                            wins = model.wins,
+                                            losses = model.losses,
+                                            searchDate = CommonUtil.getDateFormat(),
+                                            isGaming = isGaming
+                                        )
+                                    )
+                                }
+                            }
+                        }
                     }
                 },
                 onError = {
