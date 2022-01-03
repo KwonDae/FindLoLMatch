@@ -1,10 +1,12 @@
 package com.example.testriotapi.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
+import com.example.testriotapi.Common.Constants
 import com.example.testriotapi.Common.Constants.USER_DATABASE_NAME
+import com.example.testriotapi.db.UserDAO
 import com.example.testriotapi.db.UserDatabase
-import com.example.testriotapi.util.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +27,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreference(@ApplicationContext context: Context): PreferenceManager {
-        return PreferenceManager(context)
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
     }
 
     @Singleton
@@ -41,5 +43,5 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideUserDao(db: UserDatabase) = db.getUserDao()
+    fun provideUserDao(db: UserDatabase): UserDAO = db.getUserDao()
 }

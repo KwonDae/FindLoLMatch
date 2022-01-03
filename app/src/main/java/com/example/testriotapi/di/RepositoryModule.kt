@@ -1,13 +1,8 @@
 package com.example.testriotapi.di
 
-import com.example.testriotapi.network.ApiSummonerService
-import com.example.testriotapi.repository.SummonerRepository
-import com.example.testriotapi.util.PreferenceManager
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 
 /**
  * @author Daewon

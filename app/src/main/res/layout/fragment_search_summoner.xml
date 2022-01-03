@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent"
-            app:startIconDrawable="@drawable/ic_android_black_24dp">
+            app:startIconDrawable="@drawable/ic_baseline_find_in_page_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText"
@@ -46,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:inputType="text"
-
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 

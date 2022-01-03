@@ -12,8 +12,10 @@ object Constants {
     const val TAG : String = "로그"
     const val USER_DATABASE_NAME = "user_db"
 
+    const val SHARED_PREFERENCES_NAME = "sharedPref"
+
     val BASE_URL = "https://kr.api.riotgames.com/lol/"
-    val API_KEY = "RGAPI-d9514ffc-5c0e-4b36-bf62-5234ed31beb8"
+    val API_KEY = "RGAPI-6e29dc31-d150-4db7-b7b9-03872656d680"
 }
 
 enum class RESPONSE_STATUS{

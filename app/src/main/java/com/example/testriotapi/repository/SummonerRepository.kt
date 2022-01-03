@@ -1,18 +1,14 @@
 package com.example.testriotapi.repository
 
-import android.util.Log
-import com.example.testriotapi.Common.Constants.TAG
-import com.example.testriotapi.Common.RESPONSE_STATUS
+import android.content.SharedPreferences
 import com.example.testriotapi.db.User
 import com.example.testriotapi.db.UserDAO
-import com.example.testriotapi.model.SummonerModel
 import com.example.testriotapi.model.AccountRankModel
+import com.example.testriotapi.model.SummonerModel
 import com.example.testriotapi.network.ApiResult
 import com.example.testriotapi.network.ApiSummonerService
 import com.example.testriotapi.network.onError
 import com.example.testriotapi.network.onSuccess
-import com.example.testriotapi.util.PreferenceManager
-import com.google.gson.Gson
 import javax.inject.Inject
 
 /**
@@ -25,7 +21,7 @@ import javax.inject.Inject
 class SummonerRepository @Inject constructor(
     private val apiService: ApiSummonerService,
     private val userDao: UserDAO,
-    private val pref: PreferenceManager
+    private val pref: SharedPreferences
 ) {
 
     suspend fun getSummoner(

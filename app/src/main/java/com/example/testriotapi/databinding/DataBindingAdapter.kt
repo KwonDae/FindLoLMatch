@@ -26,15 +26,38 @@ object DataBindingAdapter {
     @JvmStatic
     @BindingAdapter("tierImage")
     fun tierImage(imageView: ImageView, tier: String) {
-        when(tier) {
-            "GOLD" -> {
-                imageView.setImageResource(R.drawable.emblem_gold)
+        when (tier) {
+
+            "IRON" -> {
+                imageView.setImageResource(R.drawable.emblem_iron)
             }
+
+            "BRONZE" -> {
+                imageView.setImageResource(R.drawable.emblem_bronze)
+            }
+
             "SILVER" -> {
                 imageView.setImageResource(R.drawable.emblem_silver)
             }
-            "BRONZE" -> {
-                imageView.setImageResource(R.drawable.emblem_bronze)
+
+            "GOLD" -> {
+                imageView.setImageResource(R.drawable.emblem_gold)
+            }
+
+            "PLATINUM" -> {
+                imageView.setImageResource(R.drawable.emblem_platinum)
+            }
+
+            "DIAMOND" -> {
+                imageView.setImageResource(R.drawable.emblem_diamond)
+            }
+
+            "MASTER" -> {
+                imageView.setImageResource(R.drawable.emblem_master)
+            }
+
+            "GRANDMASTER" -> {
+                imageView.setImageResource(R.drawable.emblem_grandmaster)
             }
 
             "CHALLENGER" -> {
@@ -42,7 +65,7 @@ object DataBindingAdapter {
             }
 
             else -> {
-                imageView.setImageResource(R.drawable.emblem_grandmaster)
+                imageView.setImageResource(R.drawable.emblem_challenger)
             }
         }
     }

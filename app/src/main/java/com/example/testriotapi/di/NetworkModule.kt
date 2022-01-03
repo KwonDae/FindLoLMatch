@@ -1,5 +1,6 @@
 package com.example.testriotapi.di
 
+import android.content.SharedPreferences
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
@@ -7,8 +8,6 @@ import com.example.testriotapi.BaseApplication
 import com.example.testriotapi.BuildConfig
 import com.example.testriotapi.Common.Constants
 import com.example.testriotapi.network.ApiSummonerService
-import com.example.testriotapi.util.PreferenceManager
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.mhows.reple.network.adapter.CoroutineCallAdapterFactory
@@ -45,7 +44,7 @@ object NetworkModule {
     
     @Singleton
     @Provides
-    fun provideOkHttpClient(pref: PreferenceManager): OkHttpClient = OkHttpClient.Builder().apply {
+    fun provideOkHttpClient(pref: SharedPreferences): OkHttpClient = OkHttpClient.Builder().apply {
         connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
         readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
@@ -61,7 +60,7 @@ object NetworkModule {
 
             if(response.code != 200) {
                 Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(BaseApplication.instance, "${response.code} 에러 입니다.", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(BaseApplication.instance, "${response.code} 에러 입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
             return@addInterceptor response

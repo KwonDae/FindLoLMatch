@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/searchSummonerFragment"
-        android:title="SearchSummoner"
-        android:icon="@drawable/ic_launcher_foreground"/>
+        android:title="소환사 검색"
+        android:icon="@drawable/ic_baseline_find_in_page_24"/>
 
     <item android:id="@+id/searchListFragment"
-        android:title="SearchList"
-        android:icon="@drawable/ic_launcher_foreground"/>
+        android:title="검색 기록"
+        android:icon="@drawable/ic_baseline_history_24"/>
 
     <item android:id="@+id/settingsFragment"
-        android:title="Settings"
-        android:icon="@drawable/ic_launcher_foreground"/>
+        android:title="설정"
+        android:icon="@drawable/ic_settings"/>
 
 </menu>
