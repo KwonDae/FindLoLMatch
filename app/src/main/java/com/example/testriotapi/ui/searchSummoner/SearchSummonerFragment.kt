@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.testriotapi.Common.Constants.TAG
 import com.example.testriotapi.R
 import com.example.testriotapi.databinding.FragmentSearchSummonerBinding
@@ -30,9 +34,7 @@ class SearchSummonerFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val viewModel: SummonerViewModel by viewModels({
-        requireActivity()
-    })
+    private val viewModel: SummonerViewModel by activityViewModels()
     private lateinit var binding: FragmentSearchSummonerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class SearchSummonerFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -59,6 +62,12 @@ class SearchSummonerFragment : Fragment() {
 
         initBinding()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
     }
 
     companion object {
@@ -94,30 +103,30 @@ class SearchSummonerFragment : Fragment() {
             }
         }
 
-        viewModel.accountRankModel.observe(viewLifecycleOwner) {
-            it?.let {
-                when (it[0].tier) {
-                    "GOLD" -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_gold)
-                    }
-                    "SILVER" -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_silver)
-                    }
-                    "BRONZE" -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_bronze)
-                    }
-
-                    "CHALLENGER" -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_challenger)
-                    }
-
-                    else -> {
-                        binding.imageView.setImageResource(R.drawable.emblem_grandmaster)
-                    }
-                }
-
-            }
-        }
+//        viewModel.accountRankModel.observe(viewLifecycleOwner) {
+//            it?.let {
+//                when (it[0].tier) {
+//                    "GOLD" -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_gold)
+//                    }
+//                    "SILVER" -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_silver)
+//                    }
+//                    "BRONZE" -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_bronze)
+//                    }
+//
+//                    "CHALLENGER" -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_challenger)
+//                    }
+//
+//                    else -> {
+//                        binding.imageView.setImageResource(R.drawable.emblem_grandmaster)
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
     override fun onStart() {

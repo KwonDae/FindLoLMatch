@@ -90,6 +90,7 @@ class SummonerViewModel @Inject constructor(private val summonerRepository: Summ
                             }
                         }
                     }
+                    ""
                 },
                 onError = {
 

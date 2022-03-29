@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.testriotapi.R
 import com.example.testriotapi.databinding.FragmentSearchListBinding
@@ -30,9 +31,7 @@ class SearchListFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchListBinding
 
-    private val viewModel: SummonerViewModel by viewModels({
-        requireActivity()
-    })
+    private val viewModel: SummonerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

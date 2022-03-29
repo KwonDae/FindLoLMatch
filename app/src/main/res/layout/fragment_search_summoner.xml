@@ -67,6 +67,7 @@
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            tierImage="@{viewModel.accountRankModel.get(0).tier}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchButton"
             app:layout_constraintVertical_bias="0.2"

@@ -25,7 +25,9 @@ object DataBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("tierImage")
-    fun tierImage(imageView: ImageView, tier: String) {
+    fun tierImage(imageView: ImageView, tier: String?) {
+        if(tier.isNullOrBlank())
+            return
         when (tier) {
 
             "IRON" -> {

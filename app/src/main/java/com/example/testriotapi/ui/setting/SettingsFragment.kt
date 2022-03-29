@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.testriotapi.R
 import com.example.testriotapi.ui.viewModels.SummonerViewModel
@@ -26,9 +27,9 @@ class SettingsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val viewModel: SummonerViewModel by viewModels({
-        requireActivity()
-    })
+    // Using the activityViewModels() Kotlin property delegate from the
+    // fragment-ktx artifact to retrieve the ViewModel in the activity scope
+    private val viewModel: SummonerViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
