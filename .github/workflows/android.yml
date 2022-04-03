@@ -43,7 +43,7 @@ jobs:
     - name: 테스트용 apk artifact 업로드
       uses: actions/upload-artifact@v2
       with:
-        name: app-debug.apk
+        name: app-debug-action.apk
         path: app/build/outputs/apk/debug/app-debug.apk
         
     - name: action-slack
