@@ -102,31 +102,6 @@ class SearchSummonerFragment : Fragment() {
                 viewModel.getSummonerData(binding.editText.text.toString())
             }
         }
-
-//        viewModel.accountRankModel.observe(viewLifecycleOwner) {
-//            it?.let {
-//                when (it[0].tier) {
-//                    "GOLD" -> {
-//                        binding.imageView.setImageResource(R.drawable.emblem_gold)
-//                    }
-//                    "SILVER" -> {
-//                        binding.imageView.setImageResource(R.drawable.emblem_silver)
-//                    }
-//                    "BRONZE" -> {
-//                        binding.imageView.setImageResource(R.drawable.emblem_bronze)
-//                    }
-//
-//                    "CHALLENGER" -> {
-//                        binding.imageView.setImageResource(R.drawable.emblem_challenger)
-//                    }
-//
-//                    else -> {
-//                        binding.imageView.setImageResource(R.drawable.emblem_grandmaster)
-//                    }
-//                }
-//
-//            }
-//        }
     }
 
     override fun onStart() {
