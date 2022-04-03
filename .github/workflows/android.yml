@@ -31,14 +31,15 @@ jobs:
       run: bash ./gradlew assembleDebug --stacktrace
       
     - run: './gradlew assembleDebug'
-    - uses: MeilCli/slack-upload-file@v1
-      with:
-        slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
-        channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
-        file_path: 'app/build/outputs/apk/debug/app-debug.apk'
-        file_name: 'app-debug.apk'
-        file_type: 'apk'
-        initial_comment: '${{ github.ref }} 테스트 앱 슬랙 배포 성공'
+    - uses: https://slack.com/api/files.upload -F token=${{ secrets.SLACK_READ_WRITE_TOKEN }} -F channels=${{ secrets.SLACK_CHANNEL_DEPLOY }} -F file=@app/build/outputs/apk/debug/app-debug.apk
+#     - uses: MeilCli/slack-upload-file@v1
+#       with:
+#         slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
+#         channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
+#         file_path: 'app/build/outputs/apk/debug/app-debug.apk'
+#         file_name: 'app-debug.apk'
+#         file_type: 'apk'
+#         initial_comment: '${{ github.ref }} 테스트 앱 슬랙 배포 성공'
         
     - name: 테스트용 apk artifact 업로드
       uses: actions/upload-artifact@v2
