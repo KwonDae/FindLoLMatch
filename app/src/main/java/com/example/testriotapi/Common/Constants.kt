@@ -15,7 +15,7 @@ object Constants {
     const val SHARED_PREFERENCES_NAME = "sharedPref"
 
     val BASE_URL = "https://kr.api.riotgames.com/lol/"
-    val API_KEY = "RGAPI-ca49a0a3-a744-4fc8-b61d-2d5f0b488aa8"
+    val API_KEY = "RGAPI-82f1e366-e9c0-4548-8eee-e67f5730cf56"
 }
 
 enum class RESPONSE_STATUS{

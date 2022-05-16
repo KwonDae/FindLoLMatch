@@ -74,8 +74,8 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.4.0'
 
     // Navigation Components
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
 
     // dagger hilt
     implementation("com.google.dagger:hilt-android:2.40.2")
